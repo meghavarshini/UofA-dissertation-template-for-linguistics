@@ -3,18 +3,19 @@
 %% of Planetary Sciences at The University of Arizona.
 %%
 %%
-%% Peter Halverson	1989 (non-LPL)
-%% William D. Sears	1994
-%% Rov Vervack		1996
-%% Andrew Rivkin	1997
-%% Joe Spitale		2001
-%% Dave O'Brien		2003
-%% Ross A. Beyer	2004
-%% Jim Richardson	2005
-%% Terry Hurford	2005
-%% Curtis S. Cooper	2007
-%% David A. Minton 2009
-%% Remo Nitschke 2023 (Linguistics)
+%% Peter Halverson		   1989 (non-LPL)
+%% William D. Sears		   1994
+%% Rov Vervack			   1996
+%% Andrew Rivkin		   1997
+%% Joe Spitale			   2001
+%% Dave O'Brien			   2003
+%% Ross A. Beyer		   2004
+%% Jim Richardson		   2005
+%% Terry Hurford		   2005
+%% Curtis S. Cooper		   2007
+%% David A. Minton		   2009
+%% Remo Nitschke		   2023 (Linguistics)
+%% Meghavarshini Krishnaswamy [MK] 2025 (Linguistics) 
 %%
 %% Todo:
 %% Currently footskip is zero.  This should be looked into.
@@ -24,20 +25,20 @@
 %% in and make everything consistent with the most recent rev, but
 %% since they aren't too different, I'm guessing things will work
 %% for a while.
-%%
+%% Latest revision was to the approval form- changed 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{uathesis}[2005/08/09 University of Arizona Thesis Class]
 
 \RequirePackage{ifthen}
 \RequirePackage{tikz} % we need this for the watermark option
 \RequirePackage{cclicenses} % This is used to generate the Creative Commons
-									 % icons.  cclicenses.sty should be present along
-									 % with this file.  If you don't plan on using a
-									 % CC license, you can remove this.
+			    % icons.  cclicenses.sty should be present along
+			    % with this file.  If you don't plan on using a
+			    % CC license, you can remove this.
 
 
 %% This class file will be based off of the book class, no need to
-%% reinvent the wheel.  However, we need to set up some options that
+%% reinvent the wheel. However, we need to set up some options that
 %% are specific to the various kinds of theses.
 
 % Set a default for ThesisType, just in case
@@ -477,6 +478,11 @@
 \newcommand{\DegreeMajor}{#1}
 }
 
+% MK added this on 5/2025 so that the department name could be included in the approval page
+\newcommand{\department}[1]{%
+\newcommand{\Department}{#1}
+}
+
 
 %%---------------------------- Title Page -----------------------------
 %%
@@ -563,19 +569,23 @@ THE UNIVERSITY OF ARIZONA
 
 }
 
-
 %%---------------------------- Approval Form --------------------------
-%% 
-%% This creates the Committee Approval form, the arguments are as
-%% follows:	#1	defense date
-%%			#2	Dissertation Director's name
-%%			#3	1st committee member's name
-%%			#4	2nd committee member's name
-%%			#5	3rd committee member's name
-%%			#6	4th committee member's name
-%%			#7	5th committee member's name
+%% EDITED BY MK ON 2025-05-28 to incorporate latest text provided by the grad college,
+%%  and change how the committee chair's name and title appear on the document. 
+%% Description edited.
 
-\newcommand{\approval}[8]{%STEPH ADDED A COMMITTEE MEMBER
+%% This creates the Committee Approval form, the arguments (total 8) are as
+%% follows:	
+%%			#1	Defense date
+%%			#2	Dissertation Director's / Committee Chair's name
+%%			#3	Committee member's /  Committee Co-chair's name
+%%			#3	Committee member's name
+%%			#4	Ccommittee member's name
+%%			#5	Committee member's name
+%%			#6	Ccommittee member's name
+%%			#7	Committee member's name
+
+\newcommand{\approval}[8]{ %STEPH ADDED A COMMITTEE MEMBER
 
 {
 \renewcommand{\baselinestretch}{1}	% single spaced here
@@ -598,35 +608,49 @@ As members of the Dissertation Committee, we certify that we have read the \Make
 \bigskip
 \begin{flushleft}
 \begin{tabular*}{\textwidth}{p{4in}@{\extracolsep{\fill}}l}
+
+	& Date: #1	\\
+\cline{1-1}
+#2	& 			\\
+	&			\\
+	&			\\
+
 	& Date: #1	\\
 \cline{1-1}
 #3	& 			\\
 	&			\\
 	&			\\
+
 	& Date: #1	\\
 \cline{1-1}
 #4	& 			\\
-	&			\\
-	&			\\
+	& 			\\
+	& 			\\
+
 	& Date: #1	\\
 \cline{1-1}
 #5	& 			\\
-	& 			\\
-	& 			\\
+	&			\\
+	&			\\
+
 	& Date: #1	\\
 \cline{1-1}
 #6	& 			\\
 	&			\\
 	&			\\
+% MK EDITED TO ADD BACK A COMMITTEE MEMBER 
 	& Date: #1	\\
 \cline{1-1}
 #7	& 			\\
-%STEPH ADDED A COMMITTEE MEMBER HERE
 	&			\\
 	&			\\
+
 	& Date: #1	\\
 \cline{1-1}
 #8	& 			\\
+	&			\\
+	&			\\
+
 \end{tabular*}
 \end{flushleft}
 
@@ -645,16 +669,21 @@ under my direction and recommend that it be accepted as fulfilling the
 \bigskip
 \begin{flushleft}
 \begin{tabular*}{\textwidth}{p{4in}@{\extracolsep{\fill}}l}
+% MK edited the following signature lines, in accordance with grad college approval form 2025-05-28
 							& Date: #1	\\
 \cline{1-1}
-Dissertation Director: #2	&			\\
+#2							&			\\
+\ThesisType Committee Chair		&			\\
+\Department					&			\\
+
 %%%%% EVAN ADDED THE FOLLOWING FIVE LINES (CO-CHAIRS)
 %	& 			\\
 %	& 			\\
 %							& Date: #1	\\
 %\cline{1-1}
-%Dissertation Director: #4	&			\\
+%Dissertation Director: #2&			\\
 %%%%%
+
 \end{tabular*}
 \end{flushleft}
 }
@@ -662,7 +691,11 @@ Dissertation Director: #2	&			\\
 }
 
 %%---------------------------- Approval Form With Watermark --------------------------
+%% EDITED BY MK ON 2025-05-28 to incorporate latest text provided by the grad college,
+%%  and change how the committee chair's name and title appear on the document. 
+%% Description edited.
 % Creates the same approval form as above, but with a UA watermark
+
 \newcommand{\approvalWithWM}[8]{%STEPH ADDED A COMMITTEE MEMBER
 
 {
@@ -687,26 +720,38 @@ As members of the Dissertation Committee, we certify that we have read the \Make
 \bigskip
 \begin{flushleft}
 \begin{tabular*}{\textwidth}{p{4in}@{\extracolsep{\fill}}l}
+	& Date: #1	\\ %Date
+\cline{1-1}
+#2	& 			\\ %Committee Chair Name
+	&			\\ %white space
+	&			\\ %white space
+
 	& Date: #1	\\
 \cline{1-1}
-#3	& 			\\
-	&			\\
-	&			\\
-	& Date: #1	\\
+#3	& 			\\ %Committee Member Name
+	&			\\ %white space
+	&			\\ %white space
+
+	& Date: #1	\\ %Date
 \cline{1-1}
-#4	& 			\\
-	&			\\
-	&			\\
-	& Date: #1	\\
-\cline{1-1}
-#5	& 			\\
+#4	& 			\\ %Committee Member Name
+	&			\\ %white space
+	&			\\ %white space
+%% UNCOMMENT THE FOLLOWING TO ADD MORE LINES 
+%% FOR COMMITTEE MEMBERS
+
+%	& Date: #1	\\
+% \cline{1-1}
+% #5	& 			\\
 %	& 			\\
 %	& 			\\
+
 %	& Date: #1	\\
 %\cline{1-1}
 %#6	& 			\\
 %	&			\\
 %	&			\\
+
 %	& Date: #1	\\
 %\cline{1-1}
 %#7	& 			\\
@@ -734,15 +779,18 @@ under my direction and recommend that it be accepted as fulfilling the
 \bigskip
 \begin{flushleft}
 \begin{tabular*}{\textwidth}{p{4in}@{\extracolsep{\fill}}l}
-							& Date: #1	\\
+%% Uncomment the following lines for adding a co-chair:
+							& Date: #1	\\ %Date
 \cline{1-1}
-Dissertation Director: #2	&			\\
+#2							&			\\ % Committee Chair Name
+Dissertation Committee Chair		&			\\ % Chair title
+\Department					&			\\ % Department name
 %%%%% EVAN ADDED THE FOLLOWING FIVE LINES (CO-CHAIRS)
 %	& 			\\
 %	& 			\\
 %							& Date: #1	\\
 %\cline{1-1}
-%Dissertation Director: #4	&			\\
+%Dissertation Director: #2&			\\
 %%%%%
 \end{tabular*}
 \end{flushleft}
@@ -892,6 +940,33 @@ Date
 }
 }
 
+%% EDITED BY MK ON 2025-05-28 to add a page for land acjnowledgements
+%%---------------------------- Land Acknowledgements -----------------------
+%%
+%% This command includes the file that contains the acknowledgements.
+%% 
+%% \landacknowledgement
+%% Option is #1 = lan acknowledgement file name
+%%
+
+\newcommand{\landacknowledgement}[1]{
+
+% This bracket begins an unnmaed environment in which we will temporarily
+% override the document's page style.
+{
+\renewcommand{\baselinestretch}{1}	% single spaced here
+\small\normalsize					% size switch to make the spacing behave
+
+\chapter*{ LAND ACKNOWLEDGEMENT}
+
+\InputIfFileExists{#1}
+	{\typeout{Including your file #1.tex as the land acknowledgements.}}
+	{Couldn't find #1.tex to include as your land acknowledgements.}
+
+}
+}
+
+
 
 %%---------------------------- Dedication -----------------------------
 %%
@@ -969,6 +1044,25 @@ The University of Arizona, #4
 	{Couldn't find #1.tex to include as your special abstract.}
 }
 
+% %% EDITED BY MK ON 2025-05-28 to add a page for List Of Abbreviations
+%%---------------------------- List of Abbreviations  -------------------------------
+%%
+%% This command includes the file that contains the list of abbreviations.
+%%
+%% \incabbreviations
+%% Option is #1 = abstract file name
+%%
+
+\newcommand{\incabbreviations}[1]{
+
+\chapter*{LIST OF ABBREVIATIONS}
+\addcontentsline{toc}{chapter}{LIST OF ABBREVIATIONS}
+
+\InputIfFileExists{#1}
+	{\typeout{Including your file #1.tex as the List of Abbreviations.}}
+	{Couldn't find #1.tex to include as your List of Abbreviations.}
+
+}
 
 %%---------------------------- Table of Contents ----------------------
 %% 
@@ -1063,7 +1157,7 @@ The University of Arizona, #4
       \@restonecolfalse
     \fi
 	% vspace added to account for the TOC, LOF, & LOT running header business.
-    \chapter*{\vspace*{-0.5in}\listtablename}%
+    \chapter*{\vspace*{-0.5in}\listtablename} %adds name to TOC
 
 	% \markboth{\protect\raisebox{-0.5in}{\textbf{\emph{\listtablename} -- Continued}\hspace{1.5in}} }{
 	% 		  \protect\raisebox{-0.5in}{\hspace{1.5in}\textbf{\emph{\listtablename} -- Continued}} }
@@ -1077,5 +1171,5 @@ The University of Arizona, #4
 
 \clearpage
 \addtolength{\headsep}{-0.5in}		% Un-adjust things for the running
-\addtolength{\textheight}{0.5in}	% headers for TOC, LOF, LOT.
+\addtolength{\textheight}{0.5in}		% headers for TOC, LOF, LOT.
 }
