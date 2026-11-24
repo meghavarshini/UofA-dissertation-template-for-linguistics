@@ -150,6 +150,45 @@
 \addbibresource{bibliography.bib}
 \renewcommand{\bibname}{References}
 
+%% ###################### TEXT HIGHLIGHTING #######################
+%% highlight text
+\usepackage{soul}
+
+    % allow highlighting reference
+    \soulregister{\autocite}{7}
+    \soulregister{\cite}{7}
+    \soulregister{\citeauthor}{7}
+    \soulregister{\citeyear}{7}
+    \soulregister{\autoref}{7}
+
+%%  Command for highlighting - 
+%%  use \changes{text} instead of \hf
+  
+    \newcommand{\changes}[1]{{\sethlcolor{yellow}\hl{#1}}}
+    \newcommand{\changesNW}[1]{{\sethlcolor{cyan!30}\hl{#1}}} %% Another exmple for highlighting in blue
+
+    %%%% comment out for highlights %%%%
+    \renewcommand{\changes}[1]{#1}  %% highlighting off
+    \renewcommand{\changesNW}[1]{#1}    %% highlighting off
+
+%% ###################### LINE NUMBERS #######################
+\usepackage[]{lineno}
+%% OPTION 1 Uncomment one of the following lines to activate or deactiavte line numbers for the entire document:
+    % \linenumbers
+    % \nolinenumbers
+
+%% OPTION 2 macro for enabling and disabling lineno environments
+%% Use \begin{MaybeLinenumbers} ... \end{MaybeLinenumbers} to set
+%% the environment, and deactivate them for final submision:
+
+    \newif\iflinenumbers
+    % \linenumberstrue % enable lineno 
+    \linenumbersfalse % enable lineno 
+% Define a custom environment wrapper
+    \newenvironment{MaybeLinenumbers}
+      {\iflinenumbers\linenumbers\fi}
+      {\iflinenumbers\nolinenumbers\fi}
+	  
 %% ###################### TODONOTES #######################
 %% Use one of the following two package invocations. 
 %% The first is for the final version, the second for adding todonotes and comments:
