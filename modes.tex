@@ -1,0 +1,75 @@
+%% ==== Mode Toggle System ====
+%% \ifx compares macro meanings, not their text, so compare with \ifdefstring
+\RequirePackage{etoolbox}
+
+%% Fallback default if not specified in dissertation.tex
+\ifx\docmode\undefined
+    \def\docmode{cameraReady}
+\fi
+
+\typeout{DOCMODE=\docmode}
+
+\ifdefstring{\docmode}{draft}{
+    %% ===== Draft Defaults =====
+    \linenumberstrue               %% line numbers on
+    \presetkeys{todonotes}{}{}     %% todos enabled
+    \renewcommand{\changes}[1]{\hl{#1}}   %% highlighting on
+    \renewcommand{\changesNW}[1]{\hl{#1}} %% highlighting on
+}{\ifdefstring{\docmode}{reviewer}{
+    %% ===== Reviewer Mode =====
+    \linenumberstrue    %% line numbers on
+    \presetkeys{todonotes}{disable}{}   %% todos disabled
+    \renewcommand{\changes}[1]{#1} %% highlighting off
+    \renewcommand{\changesNW}[1]{#1}    %% highlighting off
+}{\ifdefstring{\docmode}{changelog}{
+    %% ===== Changelog Mode =====
+    \linenumberstrue    %% line numbers on
+    \presetkeys{todonotes}{disable}{}   %% todos disabled
+    \renewcommand{\changes}[1]{\hl{#1}}   %% highlighting on
+    \renewcommand{\changesNW}[1]{\hl{#1}} %% highlighting on
+}{
+    %% ===== Camera Ready (default) =====
+    \linenumbersfalse   %% line numbers off
+    \presetkeys{todonotes}{disable}{}   %% todos disabled
+    \renewcommand{\changes}[1]{#1}  %% highlighting off
+    \renewcommand{\changesNW}[1]{#1}    %% highlighting off
+}}}
+
+
+
+% %% ==== Mode Toggle System ====
+% %% Default: draft
+% \providecommand{\docmode}{cameraReady}
+
+% \makeatletter
+% \ifx\docmode draft
+%     %% ===== Draft Defaults =====
+%     \linenumberstrue               %% line numbers on
+%     \presetkeys{todonotes}{}{}     %% todos enabled
+%     \newcommand{\changes}[1]{\hl{#1}}   %% highlighting on
+%     \newcommand{\changesNW}[1]{\hl{#1}} %% highlighting on
+% \else\ifx\docmode reviewer
+%     %% ===== Reviewer Mode =====
+%     \linenumberstrue    %% line numbers on
+%     \presetkeys{todonotes}{disable}{}   %% todos disabled
+%     \renewcommand{\changes}[1]{#1} %% highlighting off
+%     \renewcommand{\changesNW}[1]{#1}    %% highlighting off
+
+% \else\ifx\docmode changelog
+%     %% ===== Changelog Mode =====
+%     \linenumberstrue    %% line numbers on
+%     \presetkeys{todonotes}{disable}{}   %% todos disabled
+%     \newcommand{\changes}[1]{\hl{#1}}   %% highlighting on
+%     \newcommand{\changesNW}[1]{\hl{#1}} %% highlighting on
+
+% \else\ifx\docmode cameraReady
+%     %% ===== Camera Ready =====
+%     \linenumbersfalse   %% line numbers off
+%     \presetkeys{todonotes}{disable}{}   %% todos disabled
+%     \renewcommand{\changes}[1]{#1}  %% highlighting off
+%     \renewcommand{\changesNW}[1]{#1}    %% highlighting off
+% \fi\fi\fi
+\makeatletter
+\typeout{AFTER: lineno=\iflinenumbers on\else off\fi, todo-disabled=\if@todonotes@disabled yes\else no\fi, changes=\meaning\changes}
+\makeatother
+
